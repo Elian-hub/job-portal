@@ -1,0 +1,25 @@
+.lnk {
+  text-decoration: none;
+}
+
+.inputfield {
+  width: 200px;
+  height: 20px;
+  /* border-style: double;
+  border-color: black; */
+  border: none;
+  background-color: rgb(220, 184, 247);
+  padding: 10px;
+  border-radius: 2rem;
+}
+.frm label {
+  font-family: cursive;
+}
+
+.btn {
+  background-color: rgb(220, 184, 247);
+  border: none;
+  border-radius: 2rem;
+  width: 8rem;
+  height: 1.5rem;
+}

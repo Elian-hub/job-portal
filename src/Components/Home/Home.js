@@ -1,27 +1,26 @@
 import home from "./Home.module.css";
 import { Link } from "react-router-dom";
+import logo from "../../image/logoJP.jpg";
 
 export function Home() {
   return (
     <div className={home.page}>
-      <nav>
-        <div>
-          <p>LOGO</p>
-        </div>
+      <div className={home.logo}>
+        <img src={logo} alt="Logo" />
+      </div>
+      <p className={home.logoname}>Job Portal</p>
 
-        <div>
-          <Link to="/admin">
-            <p>Admin</p>
+      <nav>
+        <div className={home.navbar}>
+          <Link to="/jobs" className={home.txtdeco}>
+            <p className={home.nav1}>Jobs</p>
           </Link>
-          <Link to="/reg">
-            <p>Login/Sign Up</p>
+          <Link to="/admin" className={home.txtdeco}>
+            <p className={home.nav1}>Adminstrator</p>
           </Link>
         </div>
       </nav>
-      <Link to="/application">
-        {" "}
-        <button className={home.butto}>Apply for a Job</button>{" "}
-      </Link>
+      <p className={home.txt}>Find a perfect job for you!</p>
     </div>
   );
 }

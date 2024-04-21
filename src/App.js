@@ -4,6 +4,8 @@ import { Home } from "./Components/Home/Home.js";
 import Application from "./Components/Application/Application.js";
 import Admin from "./Components/Admin/Admin.js";
 import SignUp from "./Components/SignUp/SignUp.js";
+import Jobs from "./Components/Jobs/Jobs.js";
+import Login from "./Components/Login/Login.js";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 function App() {
@@ -23,6 +25,14 @@ function App() {
     {
       path: "/reg",
       element: <SignUp />,
+    },
+    {
+      path: "/jobs",
+      element: <Jobs />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
   ]);
 

@@ -1,8 +1,9 @@
-const Application=()=>{
-   return(
+import React from 'react';
+const Application = () => {
+  return (
     <div>
-        <h1>This is where jobs are applied </h1>
+      <h1>This is where jobs are applied </h1>
     </div>
-   )
-}
+  );
+};
 export default Application;

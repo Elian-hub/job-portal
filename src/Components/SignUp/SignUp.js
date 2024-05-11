@@ -1,22 +1,144 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import signup from "../SignUp/Signup.module.css";
+// import React from 'react';
+// import { Link } from 'react-router-dom';
+// import { useState } from 'react';
+// import signup from '../SignUp/Signup.module.css';
+
+// const SignUp = () => {
+//   const [name, setName] = useState('');
+//   const [nameValid, setNameValid] = useState(true);
+//   const [email, setEmail] = useState('');
+//   const [emailValid, setEmailValid] = useState(true);
+//   const [password, setPassword] = useState('');
+//   const [passwordValid, setPasswordValid] = useState(true);
+//   const [confirmPassword, setConfirmPassword] = useState('');
+//   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
+
+//   const nameHandler = (e) => {
+//     setName(e.target.value);
+//     setNameValid(true);
+//   };
+//   console.log(name);
+
+//   const emailHandler = (e) => {
+//     setEmail(e.target.value);
+//     setEmailValid(true);
+//   };
+
+//   const passwordHandler = (e) => {
+//     setPassword(e.target.value);
+//     setPasswordValid(true);
+//   };
+
+//   const confirmPasswordHandler = (e) => {
+//     setConfirmPassword(e.target.value);
+//     setConfirmPasswordValid(true);
+//   };
+
+//   const submitHandler = (e) => {
+//     e.preventDefault();
+
+//     if (name.trim().length === 0) {
+//       setNameValid(false);
+//       return;
+//     }
+
+//     if (email.trim().length === 0) {
+//       setEmailValid(false);
+//       return;
+//     }
+//     if (password.trim().length === 0) {
+//       setPasswordValid(false);
+//       return;
+//     }
+//     if (confirmPassword.trim().length === 0) {
+//       setConfirmPasswordValid(false);
+//       return;
+//     }
+//   };
+//   return (
+//     <div>
+//       <h1>Create Account</h1>
+//       <form onSubmit={submitHandler} className={signup.frm}>
+//         <br />
+//         <label htmlFor='Username'>Username: </label>
+//         <input
+//           type='text'
+//           className={signup.inputfield}
+//           onChange={nameHandler}
+//         />
+//         <br />
+//         {!nameValid && <p>Please insert your name</p>}
+//         <br />
+//         <br />
+//         <label htmlFor='Email'>Email: </label>
+
+//         <input
+//           type='text'
+//           className={signup.inputfield}
+//           onChange={emailHandler}
+//         />
+//         <br />
+//         {!emailValid && <p>Enter valid email</p>}
+//         <br />
+//         <br />
+//         <label htmlFor='Password'>Password: </label>
+
+//         <input
+//           type='password'
+//           className={signup.inputfield}
+//           onChange={passwordHandler}
+//         />
+//         <br />
+//         {!passwordValid && <p>Input password!</p>}
+//         <br />
+//         <label htmlFor='Password'>Confirm Password: </label>
+
+//         <input
+//           type='password'
+//           className={signup.inputfield}
+//           onChange={confirmPasswordHandler}
+//         />
+//         <br />
+//         {!confirmPasswordValid && <p>Confirm password!</p>}
+//         <br />
+//         <br />
+//         <br />
+//         <button type='submit' className={signup.btn}>
+//           Sign Up
+//         </button>
+//       </form>
+
+//       <br />
+
+//       <Link to='/login' className={signup.lnk}>
+//         <p>Already have an account?Log in </p>
+//       </Link>
+//     </div>
+//   );
+// };
+
+// export default SignUp;
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { TextField, Typography, Button } from '@material-ui/core';
+import signup from '../SignUp/Signup.module.css';
 
 const SignUp = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [nameValid, setNameValid] = useState(true);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(true);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
 
   const nameHandler = (e) => {
     setName(e.target.value);
     setNameValid(true);
   };
-  console.log(name);
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -59,58 +181,65 @@ const SignUp = () => {
       <h1>Create Account</h1>
       <form onSubmit={submitHandler} className={signup.frm}>
         <br />
-        <label htmlFor="Username">Username: </label>
-        <input
-          type="text"
+        <TextField
+          label='Username'
+          variant='outlined'
           className={signup.inputfield}
+          style={{ marginBottom: '40px' }}
           onChange={nameHandler}
+          error={!nameValid}
+          helperText={!nameValid && 'Please insert your name'}
         />
         <br />
-        {!nameValid && <p>Please insert your name</p>}
-        <br />
-        <br />
-        <label htmlFor="Email">Email: </label>
-
-        <input
-          type="text"
+        <TextField
+          label='Email'
+          variant='outlined'
           className={signup.inputfield}
+          style={({ marginBottom: '40px' }, { marginTop: '10px' })}
           onChange={emailHandler}
+          error={!emailValid}
+          helperText={!emailValid && 'Enter valid email'}
         />
         <br />
-        {!emailValid && <p>Enter valid email</p>}
-        <br />
-        <br />
-        <label htmlFor="Password">Password: </label>
-
-        <input
-          type="password"
+        <TextField
+          label='Password'
+          variant='outlined'
+          type='password'
           className={signup.inputfield}
+          style={({ marginBottom: '40px' }, { marginTop: '50px' })}
           onChange={passwordHandler}
+          error={!passwordValid}
+          helperText={!passwordValid && 'Input password!'}
         />
         <br />
-        {!passwordValid && <p>Input password!</p>}
-        <br />
-        <label htmlFor="Password">Confirm Password: </label>
-
-        <input
-          type="password"
+        <TextField
+          label='Confirm Password'
+          variant='outlined'
+          type='password'
           className={signup.inputfield}
+          style={({ marginBottom: '40px' }, { marginTop: '50px' })}
           onChange={confirmPasswordHandler}
+          error={!confirmPasswordValid}
+          helperText={!confirmPasswordValid && 'Confirm password!'}
         />
         <br />
-        {!confirmPasswordValid && <p>Confirm password!</p>}
         <br />
         <br />
         <br />
-        <button type="submit" className={signup.btn}>
+        <Button
+          type='submit'
+          variant='contained'
+          color='primary'
+          className={signup.btn}
+        >
           Sign Up
-        </button>
+        </Button>
       </form>
 
       <br />
 
-      <Link to="/login" className={signup.lnk}>
-        <p>Already have an account?Log in </p>
+      <Link to='/login' className={signup.lnk}>
+        <Typography variant='body1'>Already have an account? Log in</Typography>
       </Link>
     </div>
   );

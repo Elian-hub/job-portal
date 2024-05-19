@@ -9,6 +9,7 @@ import Jobs, { loader as jobsloader } from './Components/Jobs/Jobs.js';
 import Login from './Components/Login/Login.js';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import CVpage from './Components/CV/CV.js';
 function App() {
   const route = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ function App() {
     {
       path: '/login',
       element: <Login />,
+    },
+    {
+      path: '/CV',
+      element: <CVpage />,
     },
   ]);
 

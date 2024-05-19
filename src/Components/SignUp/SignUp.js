@@ -1,248 +1,194 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { useState } from 'react';
-// import signup from '../SignUp/Signup.module.css';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { SignUser } from '../apifetcher';
+import { Container, TextField, Button, Typography, Box } from '@mui/material';
+import { makeStyles } from '@material-ui/core';
 
-// const SignUp = () => {
-//   const [name, setName] = useState('');
-//   const [nameValid, setNameValid] = useState(true);
-//   const [email, setEmail] = useState('');
-//   const [emailValid, setEmailValid] = useState(true);
-//   const [password, setPassword] = useState('');
-//   const [passwordValid, setPasswordValid] = useState(true);
-//   const [confirmPassword, setConfirmPassword] = useState('');
-//   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
+const useStyles = makeStyles((theme) => ({
+  link: {
+    textDecoration: 'none',
+    '&:hover': {
+      color: 'rgb(127, 9, 211)',
+    },
+  },
+  inputfield: {
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#e0c1f7', // Custom border color when focused
+      },
+    },
+  },
+}));
 
-//   const nameHandler = (e) => {
-//     setName(e.target.value);
-//     setNameValid(true);
-//   };
-//   console.log(name);
+const Login = () => {
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [jobbb, setJobbb] = useState({});
 
-//   const emailHandler = (e) => {
-//     setEmail(e.target.value);
-//     setEmailValid(true);
-//   };
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const jobData = {
+      name: searchParams.get('name'),
+      description: searchParams.get('description'),
+      location: searchParams.get('location'),
+      salary: searchParams.get('salary'),
+    };
+    setJobbb(jobData);
+  }, [location.search]);
 
-//   const passwordHandler = (e) => {
-//     setPassword(e.target.value);
-//     setPasswordValid(true);
-//   };
-
-//   const confirmPasswordHandler = (e) => {
-//     setConfirmPassword(e.target.value);
-//     setConfirmPasswordValid(true);
-//   };
-
-//   const submitHandler = (e) => {
-//     e.preventDefault();
-
-//     if (name.trim().length === 0) {
-//       setNameValid(false);
-//       return;
-//     }
-
-//     if (email.trim().length === 0) {
-//       setEmailValid(false);
-//       return;
-//     }
-//     if (password.trim().length === 0) {
-//       setPasswordValid(false);
-//       return;
-//     }
-//     if (confirmPassword.trim().length === 0) {
-//       setConfirmPasswordValid(false);
-//       return;
-//     }
-//   };
-//   return (
-//     <div>
-//       <h1>Create Account</h1>
-//       <form onSubmit={submitHandler} className={signup.frm}>
-//         <br />
-//         <label htmlFor='Username'>Username: </label>
-//         <input
-//           type='text'
-//           className={signup.inputfield}
-//           onChange={nameHandler}
-//         />
-//         <br />
-//         {!nameValid && <p>Please insert your name</p>}
-//         <br />
-//         <br />
-//         <label htmlFor='Email'>Email: </label>
-
-//         <input
-//           type='text'
-//           className={signup.inputfield}
-//           onChange={emailHandler}
-//         />
-//         <br />
-//         {!emailValid && <p>Enter valid email</p>}
-//         <br />
-//         <br />
-//         <label htmlFor='Password'>Password: </label>
-
-//         <input
-//           type='password'
-//           className={signup.inputfield}
-//           onChange={passwordHandler}
-//         />
-//         <br />
-//         {!passwordValid && <p>Input password!</p>}
-//         <br />
-//         <label htmlFor='Password'>Confirm Password: </label>
-
-//         <input
-//           type='password'
-//           className={signup.inputfield}
-//           onChange={confirmPasswordHandler}
-//         />
-//         <br />
-//         {!confirmPasswordValid && <p>Confirm password!</p>}
-//         <br />
-//         <br />
-//         <br />
-//         <button type='submit' className={signup.btn}>
-//           Sign Up
-//         </button>
-//       </form>
-
-//       <br />
-
-//       <Link to='/login' className={signup.lnk}>
-//         <p>Already have an account?Log in </p>
-//       </Link>
-//     </div>
-//   );
-// };
-
-// export default SignUp;
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { TextField, Typography, Button } from '@material-ui/core';
-import signup from '../SignUp/Signup.module.css';
-
-const SignUp = () => {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [nameValid, setNameValid] = useState(true);
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(true);
-  const [password, setPassword] = useState('');
+  const [Password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
+  const [PasswordCon, setPasswordCon] = useState('');
+  const [passwordConValid, setPasswordConValid] = useState(true);
 
-  const nameHandler = (e) => {
-    setName(e.target.value);
+  const usernameHandler = (e) => {
+    setUsername(e.target.value);
     setNameValid(true);
   };
-
   const emailHandler = (e) => {
     setEmail(e.target.value);
     setEmailValid(true);
   };
-
   const passwordHandler = (e) => {
     setPassword(e.target.value);
     setPasswordValid(true);
   };
-
-  const confirmPasswordHandler = (e) => {
-    setConfirmPassword(e.target.value);
-    setConfirmPasswordValid(true);
+  const passwordConHandler = (e) => {
+    setPasswordCon(e.target.value);
+    setPasswordConValid(true);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const isValidEmail = (mail) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
+  };
+  const isValidName = (name) => {
+    return /^[a-zA-Z]+(?: [a-zA-Z]+)*$/.test(name);
+  };
+  const isValidPassword = (pass) => {
+    return /^(?=.*[!@#$%^&*()-_=+{};:,<.>?])(?=.*[A-Z]).{8,}$/.test(pass);
+  };
 
-    if (name.trim().length === 0) {
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    if (username.trim().length === 0 || !isValidName(username)) {
       setNameValid(false);
       return;
     }
-
-    if (email.trim().length === 0) {
+    if (email.trim().length === 0 || !isValidEmail(email)) {
       setEmailValid(false);
       return;
     }
-    if (password.trim().length === 0) {
+    if (Password.trim().length === 0 || !isValidPassword(Password)) {
       setPasswordValid(false);
       return;
     }
-    if (confirmPassword.trim().length === 0) {
-      setConfirmPasswordValid(false);
+    if (Password !== PasswordCon) {
+      setPasswordConValid(false);
       return;
     }
+    console.log('success');
+
+    const Signed = await SignUser({
+      username: username,
+      email,
+      password: Password,
+      confirmPassword: PasswordCon,
+    });
+    if (Signed.status === 'success') {
+      navigate('/login');
+    }
   };
+
+  console.log(jobbb); // log passed state
+
   return (
-    <div>
-      <h1>Create Account</h1>
-      <form onSubmit={submitHandler} className={signup.frm}>
+    <Container maxWidth='sm'>
+      <Box mt={4} mb={2}>
+        <Typography variant='h4' component='h1' gutterBottom>
+          Create Account
+        </Typography>
+      </Box>
+      <form onSubmit={onSubmitHandler}>
+        <Box mb={2}>
+          <TextField
+            className={classes.inputfield}
+            label='Username'
+            variant='outlined'
+            onChange={usernameHandler}
+            error={!nameValid}
+            helperText={!nameValid ? 'Please enter a valid name' : ''}
+          />
+        </Box>
+        <Box mb={2}>
+          <TextField
+            className={classes.inputfield}
+            label='Email'
+            variant='outlined'
+            onChange={emailHandler}
+            error={!emailValid}
+            helperText={!emailValid ? 'Please enter a valid email' : ''}
+          />
+        </Box>
+        <Box mb={2}>
+          <TextField
+            className={classes.inputfield}
+            label='Password'
+            type='password'
+            variant='outlined'
+            onChange={passwordHandler}
+            error={!passwordValid}
+            helperText={
+              !passwordValid
+                ? 'Password should have at least one special character, an uppercase letter, and be at least 8 characters long'
+                : ''
+            }
+          />
+        </Box>
+        <Box mb={2}>
+          <TextField
+            className={classes.inputfield}
+            label='Confirm Password'
+            type='password'
+            variant='outlined'
+            onChange={passwordConHandler}
+            error={!passwordConValid}
+            helperText={!passwordConValid ? 'Passwords do not match' : ''}
+          />
+        </Box>
         <br />
-        <TextField
-          label='Username'
-          variant='outlined'
-          className={signup.inputfield}
-          style={{ marginBottom: '40px' }}
-          onChange={nameHandler}
-          error={!nameValid}
-          helperText={!nameValid && 'Please insert your name'}
-        />
-        <br />
-        <TextField
-          label='Email'
-          variant='outlined'
-          className={signup.inputfield}
-          style={({ marginBottom: '40px' }, { marginTop: '10px' })}
-          onChange={emailHandler}
-          error={!emailValid}
-          helperText={!emailValid && 'Enter valid email'}
-        />
-        <br />
-        <TextField
-          label='Password'
-          variant='outlined'
-          type='password'
-          className={signup.inputfield}
-          style={({ marginBottom: '40px' }, { marginTop: '50px' })}
-          onChange={passwordHandler}
-          error={!passwordValid}
-          helperText={!passwordValid && 'Input password!'}
-        />
-        <br />
-        <TextField
-          label='Confirm Password'
-          variant='outlined'
-          type='password'
-          className={signup.inputfield}
-          style={({ marginBottom: '40px' }, { marginTop: '50px' })}
-          onChange={confirmPasswordHandler}
-          error={!confirmPasswordValid}
-          helperText={!confirmPasswordValid && 'Confirm password!'}
-        />
-        <br />
-        <br />
-        <br />
-        <br />
-        <Button
-          type='submit'
-          variant='contained'
-          color='primary'
-          className={signup.btn}
-        >
-          Sign Up
-        </Button>
+        <Box mb={2}>
+          <Button
+            sx={{
+              backgroundColor: 'rgb(198, 123, 252)',
+              '&:hover': {
+                backgroundColor: 'rgb(127, 9, 211)',
+              },
+            }}
+            type='submit'
+            variant='contained'
+            color='primary'
+          >
+            Sign Up
+          </Button>
+        </Box>
       </form>
-
-      <br />
-
-      <Link to='/login' className={signup.lnk}>
-        <Typography variant='body1'>Already have an account? Log in</Typography>
-      </Link>
-    </div>
+      <Box mt={2}>
+        <Typography
+          className={classes.link}
+          variant='body2'
+          component={Link}
+          to='/login'
+        >
+          Already have an account? Login
+        </Typography>
+      </Box>
+    </Container>
   );
 };
 
-export default SignUp;
+export default Login;

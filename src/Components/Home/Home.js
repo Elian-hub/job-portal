@@ -16,7 +16,7 @@ export function Home() {
           <Link to='/jobs' className={home.txtdeco}>
             <p className={home.nav1}>Jobs</p>
           </Link>
-          <Link to='/admin' className={home.txtdeco}>
+          <Link to='/login' className={home.txtdeco}>
             <p className={home.nav1}>Adminstrator</p>
           </Link>
         </div>

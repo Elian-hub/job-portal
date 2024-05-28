@@ -10,7 +10,7 @@
 }
 .cont {
   border: 1px solid #c67bfc;
- /* border: 1px solid #e0c1f7;*/
+  /* border: 1px solid rgb(187, 117, 240); */
   width: 400px;
   display: flex;
   justify-content: space-around;

@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
         borderColor: '#e0c1f7', // Custom border color when focused
       },
     },
+    '& label.Mui-focused': {
+      color: 'gray',
+    },
   },
 }));
 
@@ -98,6 +101,7 @@ const Login = () => {
       email,
       password: Password,
       confirmPassword: PasswordCon,
+      appliedJobs: jobbb,
     });
     if (Signed.status === 'success') {
       navigate('/login');

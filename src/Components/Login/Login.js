@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
         borderColor: '#e0c1f7', // Custom border color when focused
       },
     },
+    '& label.Mui-focused': {
+      color: 'gray',
+    },
   },
 }));
 
@@ -69,7 +72,12 @@ const Sign = () => {
       setLoginValid(false);
       return;
     }
-    if (loged.status === 'success') {
+    // if (loged.status === 'success') {
+    //   console.log(loged);
+    //   navigate('/CV');
+    if (loged.status === 'success' && loged.data.role === 'admin') {
+      navigate('/admin');
+    } else if (loged.status === 'success' && loged.data.role === 'user') {
       navigate('/CV');
     }
   };

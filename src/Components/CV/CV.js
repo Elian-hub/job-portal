@@ -1,8 +1,9 @@
 import FileUpload from './FileUpload';
+
 const CVpage = () => {
   return (
     <div>
-      <h2>Upload Your CV please!</h2>
+      <h2>Upload your resume please</h2>
       <br />
       <FileUpload />
     </div>

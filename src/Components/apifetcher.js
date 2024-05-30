@@ -60,3 +60,27 @@ export async function SignUser(details) {
     return err.message;
   }
 }
+
+export async function postJob(details) {
+  const urllog = 'http://localhost:3001/jobs/v1';
+
+  try {
+    const response = await fetch(`${urllog}`, {
+      method: 'POST',
+      body: JSON.stringify(details),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.message);
+    }
+    const repo = await response.json();
+
+    return repo;
+  } catch (err) {
+    console.log(err.message);
+    return err.message;
+  }
+}

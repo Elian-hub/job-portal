@@ -19,9 +19,6 @@ export function Home() {
           <Link to='/login' className={home.txtdeco}>
             <p className={home.nav1}>Adminstrator</p>
           </Link>
-          <Link to='/createJob' className={home.txtdeco}>
-            <p className={home.nav1}>createJob</p>
-          </Link>
         </div>
       </nav>
       <p className={home.txt}>Find a perfect job for you!</p>

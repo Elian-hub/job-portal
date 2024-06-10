@@ -11,6 +11,7 @@ const Createjob = () => {
   const [locationValid, setLocationValid] = useState('true');
   const [salary, setSalary] = useState('');
   const [salaryValid, setSalaryValid] = useState('true');
+  const [isVisible, setIsVisible] = useState(true);
 
   const titleHandler = (e) => {
     setTitle(e.target.value);
@@ -30,23 +31,23 @@ const Createjob = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (title.trim().length === 0 || !titleValid(title)) {
+    if (title.trim().length === 0) {
       setTitleValid('false');
       return;
     }
-    if (description.trim().length === 0 || !descriptionValid(description)) {
+    if (description.trim().length === 0) {
       setDescriptionValid('false');
       return;
     }
-    if (location.trim().length === 0 || !locationValid(location)) {
+    if (location.trim().length === 0) {
       setLocationValid('false');
       return;
     }
-    if (salary.trim().length === 0 || !salaryValid(description)) {
+    if (salary.trim().length === 0) {
       setSalaryValid('false');
       return;
     }
-
+    console.log(title, description, location, salary);
     (async () => {
       const Posted = await postJob({
         Title: title,
@@ -64,7 +65,11 @@ const Createjob = () => {
     })();
   };
 
-  return (
+  const closeHandler = () => {
+    setIsVisible(false);
+  };
+
+  return isVisible ? (
     <div>
       <Box
         sx={{
@@ -77,68 +82,81 @@ const Createjob = () => {
         <Typography component='h1' variant='h4'>
           Create Job
         </Typography>
-        <form onSubmit={submitHandler}>
-          <Box component='form' sx={{ mt: 1 }}>
-            <TextField
-              margin='normal'
-              required
-              id='title'
-              label='Job Title'
-              variant='outlined'
-              onChange={titleHandler}
-              error={!titleValid}
-              helperText={!titleValid && 'Fill Job Title'}
-            ></TextField>
 
-            <TextField
-              margin='normal'
-              required
-              id='description'
-              label='Job Description'
-              variant='outlined'
-              onChange={descriptionHandler}
-              error={!descriptionValid}
-              helperText={!descriptionValid && 'Fill Job Description'}
-            ></TextField>
-            <TextField
-              margin='normal'
-              required
-              id='location'
-              label='Job Location'
-              variant='outlined'
-              onChange={locationHandler}
-              error={!locationValid}
-              helperText={!locationValid && 'Fill Job Location'}
-            ></TextField>
-            <TextField
-              margin='normal'
-              required
-              id='salary'
-              label='Job Salary'
-              variant='outlined'
-              onChange={salaryHandler}
-              error={!salaryValid}
-              helperText={!salaryValid && 'Fill Job Salary'}
-            ></TextField>
+        <Box onSubmit={submitHandler} component='form' sx={{ mt: 1 }}>
+          <TextField
+            margin='normal'
+            required
+            id='title'
+            label='Job Title'
+            variant='outlined'
+            onChange={titleHandler}
+            error={!titleValid}
+            helperText={!titleValid && 'Fill Job Title'}
+          ></TextField>
 
-            <Button
-              sx={{
-                backgroundColor: 'rgb(198, 123, 252)',
-                '&:hover': {
-                  backgroundColor: 'rgb(127, 9, 211)',
-                },
-              }}
-              type='submit'
-              variant='contained'
-              color='primary'
-            >
-              Create Job
-            </Button>
-          </Box>
-        </form>
+          <TextField
+            margin='normal'
+            required
+            id='description'
+            label='Job Description'
+            variant='outlined'
+            onChange={descriptionHandler}
+            error={!descriptionValid}
+            helperText={!descriptionValid && 'Fill Job Description'}
+          ></TextField>
+          <TextField
+            margin='normal'
+            required
+            id='location'
+            label='Job Location'
+            variant='outlined'
+            onChange={locationHandler}
+            error={!locationValid}
+            helperText={!locationValid && 'Fill Job Location'}
+          ></TextField>
+          <TextField
+            margin='normal'
+            required
+            id='salary'
+            label='Job Salary'
+            variant='outlined'
+            onChange={salaryHandler}
+            error={!salaryValid}
+            helperText={!salaryValid && 'Fill Job Salary'}
+          ></TextField>
+
+          <Button
+            sx={{
+              backgroundColor: 'rgb(198, 123, 252)',
+              '&:hover': {
+                backgroundColor: 'rgb(127, 9, 211)',
+              },
+            }}
+            type='submit'
+            variant='contained'
+            color='primary'
+          >
+            Create Job
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: 'rgb(198, 123, 252)',
+              '&:hover': {
+                backgroundColor: 'rgb(127, 9, 211)',
+              },
+            }}
+            //type='submit'
+            variant='contained'
+            color='primary'
+            onClick={closeHandler}
+          >
+            Close
+          </Button>
+        </Box>
       </Box>
     </div>
-  );
+  ) : null;
 };
 
 export default Createjob;

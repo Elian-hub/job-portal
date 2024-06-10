@@ -37,7 +37,7 @@ const Admin = () => {
     <div>
       <h1>Administrator Roles</h1>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Box mt={6} sx={{ display: '-webkit-flex', gap: 2 }}>
+        <Box mt={2} sx={{ display: '-webkit-flex', gap: 2 }}>
           <Button
             variant='outlined'
             sx={{
@@ -82,7 +82,7 @@ const Admin = () => {
             }}
             onClick={showJobHandler}
           >
-            SHOW JOBS
+            VIEW JOBS
           </Button>
           <Button
             variant='outlined'
@@ -96,7 +96,7 @@ const Admin = () => {
               border: 'none',
             }}
           >
-            SHOW BIDDERS
+            VIEW BIDDERS
           </Button>
         </Box>
       </div>
@@ -107,7 +107,14 @@ const Admin = () => {
             <Grid>
               {jobbs.map((elem) => (
                 <Grid item xs={12} sm={4} md={3} key={elem._id}>
-                  <Card>
+                  <Card
+                    sx={{
+                      width: '300px',
+                      marginLeft: '500px',
+                      marginTop: '20px',
+                    }}
+                    raised='true'
+                  >
                     <CardContent>
                       <Typography variant='subtitle1'>
                         Title:{elem.Title}

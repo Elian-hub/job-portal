@@ -142,7 +142,7 @@ const Createjob = () => {
             variant='contained'
             color='primary'
           >
-            Create Job
+            Create
           </Button>
           <Button
             sx={{

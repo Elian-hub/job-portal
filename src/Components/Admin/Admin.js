@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, CardContent, Grid, Card, Typography } from '@mui/material';
 //import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+
 import Box from '@mui/material/Box';
 import Createjob from '../CreateJob/Createjob';
 import { getData } from '../apifetcher';
@@ -95,9 +95,8 @@ const Admin = () => {
               color: 'white',
               border: 'none',
             }}
-            endIcon={<RemoveIcon />}
           >
-            REMOVE USER
+            SHOW BIDDERS
           </Button>
         </Box>
       </div>
@@ -123,6 +122,32 @@ const Admin = () => {
                         Salary:{elem.Salary}
                       </Typography>
                     </CardContent>
+
+                    <Button
+                      sx={{
+                        backgroundColor: 'rgb(198, 123, 252)',
+                        '&:hover': {
+                          backgroundColor: 'rgb(127, 9, 211)',
+                        },
+                        margin: '6px',
+                      }}
+                      variant='contained'
+                      color='primary'
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      sx={{
+                        backgroundColor: 'rgb(198, 123, 252)',
+                        '&:hover': {
+                          backgroundColor: 'rgb(127, 9, 211)',
+                        },
+                      }}
+                      variant='contained'
+                      color='primary'
+                    >
+                      Update
+                    </Button>
                   </Card>
                 </Grid>
               ))}

@@ -73,7 +73,7 @@ const Createjob = () => {
     <div>
       <Box
         sx={{
-          mt: 8,
+          mt: 6,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -94,7 +94,7 @@ const Createjob = () => {
             error={!titleValid}
             helperText={!titleValid && 'Fill Job Title'}
           ></TextField>
-
+          <br />
           <TextField
             margin='normal'
             required
@@ -105,6 +105,7 @@ const Createjob = () => {
             error={!descriptionValid}
             helperText={!descriptionValid && 'Fill Job Description'}
           ></TextField>
+          <br />
           <TextField
             margin='normal'
             required
@@ -115,6 +116,7 @@ const Createjob = () => {
             error={!locationValid}
             helperText={!locationValid && 'Fill Job Location'}
           ></TextField>
+          <br />
           <TextField
             margin='normal'
             required
@@ -125,13 +127,16 @@ const Createjob = () => {
             error={!salaryValid}
             helperText={!salaryValid && 'Fill Job Salary'}
           ></TextField>
+          <br />
 
           <Button
             sx={{
               backgroundColor: 'rgb(198, 123, 252)',
               '&:hover': {
                 backgroundColor: 'rgb(127, 9, 211)',
+                mt: '2',
               },
+              margin: '6px',
             }}
             type='submit'
             variant='contained'
